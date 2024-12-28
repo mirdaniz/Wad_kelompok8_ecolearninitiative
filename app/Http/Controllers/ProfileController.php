@@ -4,52 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     /**
-     * Display the profile of the authenticated user.
+     * Menampilkan halaman profil.
      */
-    public function index()
+    public function show()
     {
-        $profile = Profile::where('user_id', Auth::id())->firstOrFail();
-        return view('profiles.index', compact('profile'));
+        $profile = Profile::find(1); // Ganti dengan ID pengguna atau logika autentikasi
+        return view('profiles.show', compact('profile'));
     }
 
     /**
-     * Show the form for editing the user's profile.
+     * Menampilkan form edit profil.
      */
-    public function edit($id)
+    public function edit()
     {
-        $profile = Profile::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $profile = Profile::find(1); // Ganti dengan ID pengguna atau logika autentikasi
         return view('profiles.edit', compact('profile'));
     }
 
     /**
-     * Update the user's profile.
+     * Memperbarui data profil.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:profiles,email,' . $id,
-            'profile_photo' => 'nullable|image|max:2048', // Max 2MB
-        ]);
+    $profile = Profile::find(1); // Sesuaikan dengan ID pengguna atau gunakan logika autentikasi
 
-        $profile = Profile::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+    $request->validate([
+        'name' => 'nullable|string|max:255', // Nama boleh kosong
+        'gender' => 'required',
+        'email' => 'required|email',
+        'phone' => 'required',
+    ]);
 
-        $profile->name = $request->name;
-        $profile->email = $request->email;
+    $profile->update($request->only('name', 'gender', 'email', 'phone'));
 
-        if ($request->hasFile('profile_photo')) {
-            // Simpan foto profil di folder storage/app/public/profile_photos
-            $path = $request->file('profile_photo')->store('profile_photos', 'public');
-            $profile->profile_photo = $path;
-        }
-
-        $profile->save();
-
-        return redirect()->route('profiles.index')->with('success', 'Profile updated successfully.');
+    return redirect()->route('profiles.show')->with('success', 'Profil berhasil diperbarui!');
     }
+
 }

@@ -9,25 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('profiles', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id')->unique(); // Relasi ke tabel users
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('profile_photo')->nullable();
-            $table->timestamps();
-        
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
-    }
+    public function up()
+{
+    Schema::create('profiles', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('gender');
+        $table->string('email')->unique();
+        $table->string('phone');
+        $table->timestamps();
+    });        
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('profiles');
-    }
+public function down()
+{
+    Schema::dropIfExists('profiles');
+}
+
+
+
 };

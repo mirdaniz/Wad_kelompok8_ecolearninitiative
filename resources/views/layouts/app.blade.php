@@ -81,7 +81,7 @@
   </div>
   <h5>Overview</h5>
   <ul>
-    <li><a href="#">Profile</a></li>
+    <li><a href="{{ route('profiles.show') }}">Profil</a></li>
     <li><a href="#">Dashboard</a></li>
     <li><a href="{{ route('materials.index') }}">Lesson</a></li>
     <li><a href="#">Feedback</a></li>

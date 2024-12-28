@@ -90,26 +90,27 @@
 </head>
 
 <body>
-    <div class="sidebar">
-        <div class="logo">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo">
-            <span class="fw-bold">EcoLearn Initiative</span>
-        </div>
-        <h5>Overview</h5>
-        <ul>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="{{ route('materials.index') }}">Lesson</a></li>
-            <li><a href="{{ route('feedback') }}">Feedback</a></li>
-            <li><a href="#">Forum</a></li>
-        </ul>
-    </div>
 
-    <div class="content-area">
-        @yield('content')
-    </div>
+<div class="sidebar">
+  <div class="logo">
+    <img src="{{ asset('images/logo.png') }}" alt="Logo">
+    <span class="fw-bold">EcoLearn Initiative</span>
+  </div>
+  <h5>Overview</h5>
+  <ul>
+    <li><a href="{{ route('profiles.show') }}">Profil</a></li>
+    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+    <li><a href="{{ route('materials.index') }}">Lesson</a></li>
+    <li><a href="{{ route('feedback') }}">Feedback</a></li>
+    <li><a href="#">Forum</a></li>
+  </ul>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+<div class="content-area">
+  @yield('content')
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"

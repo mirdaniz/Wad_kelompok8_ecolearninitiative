@@ -43,6 +43,6 @@
     </tbody>
 </table>
 <hr>
-<a href="{{ route('materials.index') }}" class="btn btn-primary">Kembali ke Daftar Materi</a>
+<a href="{{ route('materials.index') }}" class="btn btn-primary" style="background-color:rgb(75, 113, 76); color: white;">Kembali ke Daftar Materi</a>
 
 @endsection

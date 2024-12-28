@@ -10,7 +10,7 @@ class ReviewController extends Controller
     function getData(){
         $data = Feedback::all();
 
-        return view('feedback')->with('feedbacks', $data);
+        return view('feedbacks.feedback')->with('feedbacks', $data);
     }
 
     function detail(Request $request, $id){

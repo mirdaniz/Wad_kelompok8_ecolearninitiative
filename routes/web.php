@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
@@ -24,3 +25,9 @@ Route::put('/profiles', [ProfileController::class, 'update'])->name('profiles.up
 Route::get('/', function () {
     return view('dashboard');
 });
+
+Route::get('/feedback' , [ReviewController::class , "getData"])->name('feedback');
+Route::get('/feedback/{id}' , [ReviewController::class , "detail"])->name('feedback.detail');
+Route::post('/feedback/create' , [ReviewController::class , "create"])->name('feedback.create');
+Route::put('/feedback/update/{id}' , [ReviewController::class , "update"])->name('feedback.update');
+Route::get('/feedback/delete/{id}' , [ReviewController::class , "delete"])->name('feedback.delete');

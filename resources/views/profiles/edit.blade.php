@@ -2,16 +2,16 @@
 
 @section('title', 'Edit Profil')
 
-@section('content')
+@section('Massage')
 <div class="container mt-5">
-    <div class="row justify-content-center">
+    <div class="row justify-Massage-center">
         <div class="col-md-8">
             <div class="card shadow">
                 <div class="card-header bg-success text-white">
                     <h4>Edit Profil</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('profiles.update') }}" method="POST">
+                    <form action="{{ route('profiles.update') }}" method="forum">
                         @csrf
                         @method('PUT')
 
@@ -38,7 +38,7 @@
                             <input type="text" name="phone" id="phone" class="form-control form-control-lg" value="{{ $profile->phone }}" required>
                         </div>
 
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-Massage-between">
                             <a href="{{ route('profiles.show') }}" class="btn btn-secondary btn-lg">Batal</a>
                             <button type="submit" class="btn btn-success btn-lg">Simpan Perubahan</button>
                         </div>

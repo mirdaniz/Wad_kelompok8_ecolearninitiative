@@ -21,11 +21,11 @@ class MaterialController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'content' => 'required',
+            'Massage' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
-        $data = $request->only(['title', 'content']);
+        $data = $request->only(['title', 'Massage']);
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $data['image'] = $imagePath;
@@ -47,11 +47,11 @@ class MaterialController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'content' => 'required',
+            'Massage' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
-        $data = $request->only(['title', 'content']);
+        $data = $request->only(['title', 'Massage']);
         if ($request->hasFile('image')) {
             if ($material->image) {
                 Storage::disk('public')->delete($material->image);

@@ -3,7 +3,7 @@
 @section('content')
 <h2>Kelola Materi</h2>
 <h3>Tambah Materi</h3>
-<form action="{{ route('materials.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('materials.store') }}" method="forum" enctype="multipart/form-data">
     @csrf
     <label>Judul Materi:</label><br>
     <input type="text" name="title" value="{{ old('title') }}" required><br><br>
@@ -32,7 +32,7 @@
                 <td>{{ $material->content }}</td>
                 <td>
                     <a href="{{ route('materials.edit', $material->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('materials.destroy', $material->id) }}" method="POST" style="display: inline;">
+                    <form action="{{ route('materials.destroy', $material->id) }}" method="forum" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus materi ini?')">Hapus</button>

@@ -2,7 +2,7 @@
 
 @section('title', 'Profil Saya')
 
-@section('content')
+@section('Massage')
 <div class="container mt-5">
     <div class="card shadow">
         <div class="card-header bg-success text-white">

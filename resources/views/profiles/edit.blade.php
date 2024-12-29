@@ -2,9 +2,9 @@
 
 @section('title', 'Edit Profil')
 
-@section('Massage')
+@section('content')
 <div class="container mt-5">
-    <div class="row justify-Massage-center">
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow">
                 <div class="card-header bg-success text-white">
@@ -38,7 +38,7 @@
                             <input type="text" name="phone" id="phone" class="form-control form-control-lg" value="{{ $profile->phone }}" required>
                         </div>
 
-                        <div class="d-flex justify-Massage-between">
+                        <div class="d-flex justify-content-between">
                             <a href="{{ route('profiles.show') }}" class="btn btn-secondary btn-lg">Batal</a>
                             <button type="submit" class="btn btn-success btn-lg">Simpan Perubahan</button>
                         </div>

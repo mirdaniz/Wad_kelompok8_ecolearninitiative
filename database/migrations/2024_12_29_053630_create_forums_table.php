@@ -10,8 +10,8 @@ class CreateForumsTable extends Migration
     {
         Schema::create('forums', function (Blueprint $table) {
             $table->id();
-            $table->string('subject');
-            $table->text('message');
+            $table->string('title');
+            $table->text('content');
             $table->timestamps();
         });
     }

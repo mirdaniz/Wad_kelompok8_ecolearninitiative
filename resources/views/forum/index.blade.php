@@ -1,41 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Forum Discussions</h1>
-    <a href="{{ route('forum.create') }}" class="btn btn-primary mb-3">Create New Forum</a>
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Subject</th>
-                <th>Message</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($forums as $forum)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $forum->Subject }}</td>
-                    <td>{{ Str::limit($forum->Message, 50) }}</td>
-                    <td>
-                        <a href="{{ route('forum.show', $forum->id) }}" class="btn btn-info btn-sm">Read</a>
+    <div class="container">
+        <h2>Forum Diskusi</h2>
+        <a href="{{ route('forum.create') }}" class="btn btn-primary mb-3">Buat Forum Baru</a>
+
+        <!-- Menampilkan notifikasi -->
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('info'))
+            <div class="alert alert-info">
+                {{ session('info') }}
+            </div>
+        @endif
+
+        <div class="list-group">
+            @foreach ($forums as $forum)
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5>{{ $forum->title }}</h5>
+                        <p>{{ Str::limit($forum->content, 100) }}</p>
+                    </div>
+                    <div>
+                        
                         <a href="{{ route('forum.edit', $forum->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('forum.destroy', $forum->id) }}" method="POST" class="d-inline">
+                        <form action="{{ route('forum.destroy', $forum->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
-                    </td>
-                </tr>
+                    </div>
+                </div>
             @endforeach
-        </tbody>
-    </table>
-</div>
+        </div>
+    </div>
 @endsection

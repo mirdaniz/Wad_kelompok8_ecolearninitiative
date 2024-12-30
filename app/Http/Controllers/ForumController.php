@@ -20,52 +20,63 @@ class ForumController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
-        $validated = $request->validate([
-            'subject' => 'required|string|max:255',
-            'message' => 'required|text',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
         ]);
 
-        // Sesuaikan nama field dengan kolom di database
         Forum::create([
-            'subject' => $validated['subject'], // Gunakan nama kolom database
-            'message' => $validated['message'],
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
         ]);
 
-        return redirect()->route('forum.index')->with('success', 'Forum berhasil dibuat!');
+        return redirect()->route('forum.index')->with('success', 'Forum berhasil dibuat');
     }
 
-    public function show(Forum $forum)
+    public function edit($id)
     {
-        return view('forum.show', compact('forum'));
-    }
-
-    public function edit(Forum $forum)
-    {
+        $forum = Forum::findOrFail($id);
         return view('forum.edit', compact('forum'));
     }
 
-    public function update(Request $request, Forum $forum)
+    public function update(Request $request, $id)
     {
         // Validasi input
-        $validated = $request->validate([
-            'subject' => 'required|string|max:255',
-            'message' => 'required|text',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
         ]);
 
-        // Sesuaikan nama field dengan kolom di database
-        $forum->update([
-            'subject' => $validated['subject'], // Gunakan nama kolom database
-            'message' => $validated['message'],
-        ]);
+        // Cari forum yang ingin diupdate
+        $forum = Forum::findOrFail($id);
 
-        return redirect()->route('forum.index')->with('success', 'Forum berhasil di update!');
+        // Cek apakah ada perubahan pada data
+        $isUpdated = false;
+
+        if ($forum->title !== $request->input('title')) {
+            $forum->title = $request->input('title');
+            $isUpdated = true;
+        }
+
+        if ($forum->content !== $request->input('content')) {
+            $forum->content = $request->input('content');
+            $isUpdated = true;
+        }
+
+        // Jika ada perubahan, update data, jika tidak beri pesan
+        if ($isUpdated) {
+            $forum->save();
+            return redirect()->route('forum.index')->with('success', 'Forum berhasil diperbarui');
+        } else {
+            // Jika tidak ada perubahan, beri notifikasi
+            return redirect()->back()->with('info', 'Tidak ada perubahan untuk diupdate. Silakan ubah data terlebih dahulu.');
+        }
     }
 
-    public function destroy(Forum $forum)
+    public function destroy($id)
     {
+        $forum = Forum::findOrFail($id);
         $forum->delete();
-
-        return redirect()->route('forum.index')->with('success', 'Forum berhasil dihapus!');
+        return redirect()->route('forum.index')->with('success', 'Forum berhasil dihapus');
     }
 }

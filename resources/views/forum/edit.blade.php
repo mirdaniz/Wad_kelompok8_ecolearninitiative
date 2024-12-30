@@ -1,20 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Edit Forum</h1>
-    <form method="POST" action="{{ route('forum.update', $forum->id) }}">
-        @csrf
-        @method('PUT')
-        <div class="mb-3">
-            <label for="Subject" class="form-label">Subject</label>
-            <input type="text" class="form-control" id="Subject" name="Subject" value="{{ $forum->Subject }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="Message" class="form-label">Message</label>
-            <textarea class="form-control" id="Message" name="Message" required>{{ $forum->Message }}</textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Update</button>
-    </form>
-</div>
+    <div class="container">
+        <h2>Edit Forum</h2>
+
+        <!-- Menampilkan notifikasi -->
+        @if(session('info'))
+            <div class="alert alert-info">
+                {{ session('info') }}
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <form action="{{ route('forum.update', $forum->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="title">Subjek</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $forum->title) }}" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Pesan</label>
+                <textarea class="form-control" id="content" name="content" rows="5" required>{{ old('content', $forum->content) }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Update Forum</button>
+            <a href="{{ route('forum.index') }}" class="btn btn-secondary mt-3">Cancel</a>
+        </form>
+    </div>
 @endsection

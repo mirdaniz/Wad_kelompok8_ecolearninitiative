@@ -3,7 +3,7 @@
 @section('content')
 <h2>Edit Materi</h2>
 
-<form action="{{ route('materials.update', $material->id) }}" method="forum" enctype="multipart/form-data">
+<form action="{{ route('materials.update', $material->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 

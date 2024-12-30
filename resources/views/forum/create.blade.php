@@ -1,19 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Create New Forum</h1>
-    <form method="POST" action="{{ route('forum.store') }}">
-        @csrf
-        <div class="mb-3">
-            <label for="Subject" class="form-label">Subject</label>
-            <input type="text" class="form-control" id="Subject" name="Subject" required>
-        </div>
-        <div class="mb-3">
-            <label for="Message" class="form-label">Message</label>
-            <textarea class="form-control" id="Message" name="Message" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-</div>
+    <div class="container">
+        <h2>Buat Forum Baru</h2>
+
+        <form action="{{ route('forum.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="title">Subjek</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Pesan</label>
+                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Kirim Forum</button>
+            <a href="{{ route('forum.index') }}" class="btn btn-secondary mt-3">Cancel</a>
+        </form>
+    </div>
 @endsection

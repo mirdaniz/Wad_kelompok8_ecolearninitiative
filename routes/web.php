@@ -6,6 +6,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ActivityController;
 
 Route::view('/news1', 'news1');
 Route::view('/news2', 'news2');
@@ -31,3 +32,7 @@ Route::get('/feedback/{id}' , [ReviewController::class , "detail"])->name('feedb
 Route::post('/feedback/create' , [ReviewController::class , "create"])->name('feedback.create');
 Route::put('/feedback/update/{id}' , [ReviewController::class , "update"])->name('feedback.update');
 Route::get('/feedback/delete/{id}' , [ReviewController::class , "delete"])->name('feedback.delete');
+Route::resource('activities', ActivityController::class);
+
+
+

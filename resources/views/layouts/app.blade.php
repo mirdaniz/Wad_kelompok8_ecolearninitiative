@@ -103,6 +103,7 @@
     <li><a href="{{ route('materials.index') }}">Lesson</a></li>
     <li><a href="{{ route('feedback') }}">Feedback</a></li>
     <li><a href="#">Forum</a></li>
+    <li><a href="{{ route('activities.index') }}">Riwayat Aktivitas</a></li>
   </ul>
 </div>
 
